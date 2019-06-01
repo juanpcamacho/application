@@ -7,7 +7,7 @@ phases:
 
     commands: 
       - echo Nothing to Install
-
+      - npm install pm2@latest -g
   pre_build:
     commands:
       - echo Nothing to do in the pre-build phase
