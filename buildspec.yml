@@ -14,7 +14,7 @@ phases:
       - git clone https://github.com/juanpcamacho/application.git /timeoff-management
       - cd /timeoff-management
       - npm install
-      - npm start
+      - pm2 start npm --name "WebApp" --cwd /timeoff-management -- start
 
   
   build:
