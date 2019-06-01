@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands: 
+      - echo Nothing to Install
+
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre-build phase
+      - git clone https://github.com/juanpcamacho/application.git /timeoff-management
+      - cd timeoff-management
+      - npm install
+      - npm start
+
+  
+  build:
+    commands:
+      - echo Build start on 'date'
+      - npm test
+  
+  post_build:
+    commands:
+      - echo Build completed on 'date'
+
+artifacts:
+  files:
+    - '**/*'
