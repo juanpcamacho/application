@@ -1,2 +1,2 @@
 #!/bin/bash
-echo Test
+rm -rf /timeoff-management/*
