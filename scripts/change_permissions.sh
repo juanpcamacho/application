@@ -1,2 +1,2 @@
 #!/bin/bash
-echo Test
+pm2 kill
