@@ -1,6 +1,6 @@
-aws_access_key = "AKIAY6CX2R4QJCFH4Y6E"
+aws_access_key = ""
 
-aws_secret_key = "tOzMBYgVZRHBKK/awXGMUtlLrH4J+aUYZ8QGOdix"
+aws_secret_key = ""
 
 private_key_path = "C:\\Users\\jpcamach\\Documents\\Personal\\GCI\\terraform"
 
