@@ -286,8 +286,8 @@ resource "aws_instance" "bastion" {
 }
 
 # Create a new load balancer
-resource "aws_elb" "gorillaELB" {
-  name               = "gorilla-elb"
+resource "aws_elb" "ELB" {
+  name               = "${var.company}-elb"
   #availability_zones = "${data.aws_availability_zones.available.names}"
   subnets            = "${aws_subnet.PublicSubnet.*.id}"
   security_groups    = ["${aws_security_group.elb-sg.id}"]
@@ -321,7 +321,7 @@ resource "aws_elb" "gorillaELB" {
 
 
 ## Creating Launch Configuration
-resource "aws_launch_configuration" "gorilla_lc" {
+resource "aws_launch_configuration" "lc" {
   image_id               = "${data.aws_ami.custom.id}"
   instance_type          = "t2.micro"
   security_groups        = ["${aws_security_group.nginx-sg.id}"]
@@ -344,13 +344,13 @@ resource "aws_launch_configuration" "gorilla_lc" {
 }
 
 ## Creating AutoScaling Group
-resource "aws_autoscaling_group" "gorilla-ASC" {
-  launch_configuration = "${aws_launch_configuration.gorilla_lc.id}"
+resource "aws_autoscaling_group" "ASC" {
+  launch_configuration = "${aws_launch_configuration.lc.id}"
   vpc_zone_identifier  = "${aws_subnet.PrivateSubnet.*.id}"
   name                 = "${var.company}-ASG"
   min_size = 2
   max_size = 6
-  load_balancers = ["${aws_elb.gorillaELB.name}"]
+  load_balancers = ["${aws_elb.ELB.name}"]
   health_check_type = "ELB"
   tag {
     key                 = "Name"
@@ -673,5 +673,5 @@ resource "aws_codepipeline" "codepipeline" {
 ##################################################################################
 
 output "elb_dns_name" {
-  value = "${aws_elb.gorillaELB.dns_name}"
+  value = "${aws_elb.ELB.dns_name}"
 }
